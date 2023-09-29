@@ -81,7 +81,7 @@ x<-seq(-3,2)
 x
 x[2] <- 0
 x
-# output -3 0 -1 0 1 2
+# output: -3 0 -1 0 1 2
 
 
 #6 *The following data shows the diesel fuel purchased by Mr. Cruz.
@@ -100,13 +100,15 @@ Purchases <-data.frame(
 ) 
 Purchases
 View(Purchases)
+
 #b.What is the average fuel expenditure of Mr. Cruz from
 #Jan to June? Note: Use ‘weighted.mean(liter, purchase)‘.
 # Write the R scripts and its output.
+
 average_expenditure <-weighted.mean(Purchases$Priceperliter , Purchases$Purchasequantity)
 average_expenditure
 
-#Output 59.2625
+#Output: 59.2625
 
 #7.a
 
@@ -115,10 +117,11 @@ data <- c(length(rivers), sum(rivers), mean(rivers), median(rivers), var(rivers)
 
 data
 
-#b The results shows the built in datasets of rivers in north america and shows that length,sum,mean,median,var,sd,min,max of rivers
+#b Results shows the built in datasets of rivers in north america and shows that length,sum,mean,median,var,sd,min,max of rivers
 
 
 #output 141.0000 83357.0000 591.1844 425.0000 243908.4086 493.8708 135.0000 3710.0000
+
 
 celebrities <- c("Tom Cruise","Rolling Stones","Oprah Winfrey","U2","Tiger Woods","Steven Spielberg","Howard Stern","50 Cent","Cast of the Sopranos","Dan Brown","Bruce Springsteen","Donald Trump","Muhammad Ali","Paul McCartney","George Lucas","Elton John","David Letterman","Phil Mickelson","J.K Rowling","Bradd Pitt","Peter Jackson","Dr. Phil McGraw","Jay Lenon","Celine Dion","Kobe Bryant")
 
@@ -133,56 +136,110 @@ celeb_data <- data.frame(Celebrity = celebrities, Power_Ranking = power_rankings
 
 View(celeb_data)
 
-#8.b
-celeb_data$Power_Ranking[celeb_data$Celebrity == "J.K Rowling"] <- 15
-celeb_data$Pay_Amount[celeb_data$Celebrity == "J.K Rowling"] <- 90
-celeb_data
+#8 25 most powerful celebrities and their annual pay.
 
 
-View(celeb_data)
+#8 A Create a vector
+
+celebrities <- c("Tom Cruise","Rolling Stones","Oprah Winfrey","U2","Tiger Woods","Steven Spielberg","Howard Stern","50 Cent","Cast of the Sopranos","Dan Brown","Bruce Springsteen","Donald Trump","Muhammad Ali","Paul McCartney","George Lucas","Elton John","David Letterman","Phil Mickelson","J.K Rowling","Bradd Pitt","Peter Jackson","Dr. Phil McGraw","Jay Lenon","Celine Dion","Kobe Bryant")
+
+power_rankings <- c(1, 2, 3, 4, 5, 6, 7 ,8 , 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25)
+
+pay_amounts <- c(67, 90,225,110,90,332,302,41,52,88,55,44,55,40,233,34,40,47,75,25,39,45,32,40,31 )
 
 
-#8.c
-write.csv(celeb_data, "/cloud/project/PowerRanking.csv")
+celebData <- data.frame(Celebrity = celebrities, Power_Ranking = power_rankings, Pay_Amount = pay_amounts)
+
+View(celebData)
+
+#8. B Change power ranking of J.K Rowling
+celebData$Power_Ranking[celebData$Celebrity == "J.K Rowling"] <- 15
+celebData$Pay_Amount[celebData$Celebrity == "J.K Rowling"] <- 90
+celebData
+
+
+View(celebData)
+
+
+#8. C Create an excel file
+
+write.csv(celebData, "/cloud/project/PowerRanking.csv")
 PowerRanking <- read.csv("PowerRanking.csv")
 PowerRanking
 
 
-#8.d
-selected_rows <- celeb_data[10:20, ]
-save(selected_rows, file = "Ranks.RData")
-selected_rows
+#8. D Access the rows 10 to 20
 
+Rows10to20 <- celebData[10:20, ]
+save(Rows10to20, file = "Ranks.RData")
+Rows10to20
 
-#Output Celebrity Power_Ranking Pay_Amount
-#10 Dan Brown 10 88
-#11 Bruce Springsteen 11 55
-#12 Donald Trump 12 44
-#13 Muhammad Ali 13 55
-#14 Paul McCartney 14 40
-#15 George Lucas J.K. Rowling 90
-#16 Elton John 16 34
-#17 David Letterman 17 40
-#18 Phil Mickelson 18 47
-#19 J.K Rowling 15 90
-#20 Bradd Pitt 20 25
+#9 Download the Hotels-Vienna
 
+#9 A R script 
 
-#8.e This script selects rows 10 to 20 from the original data frame, saves the selected rows as Ranks.RData, and then prints the selected rows as the output.
+install.packages("readxl")
 
-
-#9.a
-if (!requireNamespace("readxl", quietly = TRUE)) {
-  install.packages("readxl")
-}
 library(readxl)
-file_url <- "https://tinyurl.com/Hotels-Vienna"
-download.file(file_url, destfile = "Hotels-Vienna.xlsx", mode = "wb")
-file_path <- "Hotels-Vienna.xlsx"
-hotel_data <- read_excel(file_path)
-str(hotel_data)
 
+excelFile <- read_excel("hotels-vienna.xlsx")
+excelFile
+View(excelFile)
 
-#9.b
-dataset_dimensions <- dim(hotel_data)
-dataset_dimensions
+#9 B Dimension and its output
+
+dimensionFile <- dim( excelFile)
+dimensionFile
+
+# The output is : 428 rows and 24 columns
+
+#9 C select columns
+
+colnames(excelFile)
+selectCols <- excelFile[,c("country", "neighbourhood", "price", "stars", "accommodation_type", "rating")]
+View(selectCols)
+
+#9 D Save the data as new.Rdata
+
+save(selectCols, 
+     file="new.RData")
+View(selectCols)
+
+#9 E Display the first six rows and last six rows
+
+load("new.RData")
+selectCols
+
+firstSix <- head(selectCols)
+lastSix <- tail(selectCols)
+
+firstSix
+lastSix
+
+# 10. A Create list of ten vegetables
+
+veggies <- list("Spinach", "Carrots", "Tomato", "Kale", "Peas",
+                "Corn", "Broccoli", "Lettuce", "Garlic", "Onions")
+
+veggies
+
+# 10. B Add 2 additional vegetables
+
+veggies <- append(veggies, c("Sprouts", "Bell peppers"))
+veggies
+
+# 10. C Add 4 additional vegetables
+
+veggies <- append(veggies, c("Cauliflower", "Seaweed", "Beet", "Green Pepper"), after = 5)
+
+veggieLength <- length(veggies)
+veggieLength     
+
+veggies
+
+# 10. D remove the vegetables after index 5
+
+veggies <- veggies[c(-5,-10,-15)]
+newVeggie <- length(veggies)
+newVeggie
+veggies
