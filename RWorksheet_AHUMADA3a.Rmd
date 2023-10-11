@@ -1,0 +1,146 @@
+---
+title: "RWorksheet_Ahumada#3"
+output: pdf_document
+date: "2023-10-04"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r name, echo = TRUE}
+
+LETTERS
+# 1
+# LETTERS vector
+# a.
+first11 <- LETTERS[c(1:11)]
+first11
+
+# b.
+lenLet <- length(LETTERS)
+oddNum <- LETTERS[seq(lenLet) %% 2 == 1]
+oddNum
+
+# c
+vowels <- LETTERS[c(1,5,9,15,21)]
+vowels
+
+#letters vector
+# d
+letters
+
+last5 <- letters[c(22:26)]
+last5
+
+# e
+fifto24 <- letters[c(15:24)]
+fifto24
+
+# 2
+# a
+
+city <- c("Tuguegarao City", "Manila", "Iloilo City", "Tacloban", "Samal Island", "Davao City")
+city
+
+# b
+temp <- c(42, 39, 34, 34, 30, 27)
+temp
+
+# c
+city_temp <- data.frame(city,temp)
+
+city_temp
+
+
+# d
+names(city_temp) <- c("City", "Temperature")
+city_temp
+
+# e
+
+str(city_temp)
+#The city_temp object's structure was shown by the code. 
+#It presented the data frame's contents.
+#It showed the data frame's executive summary.
+
+# f
+twoRows <- city_temp[3:4,]
+
+# g
+highest <- city_temp[which.max(city_temp$Temperature),]
+highest
+
+
+lowest <- city_temp[which.min(city_temp$Temperature),]
+lowest
+
+
+# USING MATRICES
+
+# 2 a
+
+matr <- matrix(c(1:8,11:14), nrow = 3, ncol = 4)
+matr
+
+# b
+
+mulMatr <- matr * 2
+mulMatr
+
+# c
+
+rowTwooo <- mulMatr[2,]
+rowTwooo
+
+# d
+
+twoColsAndRows <- mulMatr[c(1,2),c(3,4)]
+twoColsAndRows
+
+# e 
+
+twoColsOneRow <- mulMatr[3,c(2,3)]
+twoColsOneRow
+
+# f
+
+fourCol <- mulMatr[,4]
+fourCol
+
+# g 
+dimnames(mulMatr) <- list(c("isa", "dalawa", "tatlo"), c("uno", "dos", "tres", "quatro"))
+
+mulMatr
+
+# h
+
+matr
+dim(matr) <- c(6,2)
+matr
+
+
+# ARRAYS
+
+# 3 a 
+
+
+values <- c(1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1)
+rep_values <- rep(values, each = 2)
+
+arr <- array(rep_values, dim = c(2,4,3))
+arr
+
+# 3 b 
+# three dimensions
+
+# 3 c
+dimnames(arr) <- list(
+  letters[1:2], # row names
+  LETTERS[1:4], # col names
+  c("1st-Dimensional Array", "2nd-Dimensional Array", "3rd-Dimensional Array") # dim names
+)
+
+arr
+
+```
