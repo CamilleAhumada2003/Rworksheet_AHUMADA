@@ -1,0 +1,165 @@
+---
+title: "RWorksheet_AHUMADA#3b"
+output: pdf_document
+date: "2023-10-11"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r name, echo = TRUE} 
+#1.a
+resp_no <- c(1:20)
+sex <- c(2,2,1,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,1,2)
+occ <- c(1,3,3,3,1,2,3,1,1,1,3,2,1,3,3,1,3,1,2,1)
+pers_at_home <- c(5,7,3,8,5,9,6,7,8,4,7,5,4,7,8,8,3,11,7,6)
+sibs <- c(6,4,4,1,2,1,5,3,1,2,3,2,5,5,2,1,2,5,3,2)
+h_type <- c(1,2,3,1,1,3,3,1,2,3,2,3,2,2,3,3,3,3,3,2)
+
+
+household_data <- data.frame(
+  Respondents = resp_no,
+  Sex = sex,
+  FatherOccupation = occ,
+  PersonAtHome = pers_at_home,
+  SiblingsAtSchool = sibs,
+  HouseType = h_type
+)
+household_data
+
+#1.2
+
+str(household_data)
+summary(household_data)
+
+# 20 observations are represented by rows in the data frame, while 6 variables are represented by columns.
+
+# the variables include:
+# respondents - respondent's specific numeric identification
+# sex - indicates the respondent's gender (1 for male, 2 for female).
+# father's occupation - identifies the father's line of work (1 for farmer, 2 for driver, and 3 for others).
+# persons at home - indicates the population of the house.
+# siblings at school - reveals how many siblings are enrolled in school.
+# type of house - gives a description of the type of home (1 for wood, 2 for semi-concrete, and 3 for concrete).
+
+#1.c
+sibs_mean <- mean(household_data$SiblingsAtSchool)
+
+sibs_mean
+
+# the mean of the number of siblings at school is 2.95, which is not 5
+
+#1.d
+firstTwoRows <- household_data[1:2,]
+firstTwoRows
+
+#1.e
+thirdAndFifthRows <- household_data[c(3,5),c(2,4)]
+thirdAndFifthRows
+
+
+#1.f
+types_houses <- household_data$HouseType
+types_houses
+
+
+#1.g
+male_farmer <- household_data[household_data$Sex == 1 & household_data$FatherOccupation == 1,]
+
+male_farmer
+
+# there are no observations
+
+#1.h
+
+female_resp <- household_data[household_data$SiblingsAtSchool >= 5,]
+
+female_resp
+
+# there are five observations
+
+# ------------------------------------
+
+# 2
+df = data.frame(Ints=integer(),
+Doubles=double(), Characters=character(),
+Logicals=logical(),
+Factors=factor(),
+stringsAsFactors=FALSE
+)
+
+print("Structure of the empty dataframe:")
+print(str(df))
+
+# Created with 0 rows and 5 columns, the data frame df is empty.
+# the columns contain the following type of data:
+# ints = integer
+# doubles = double
+# characters = character
+# logicals = logical
+# factors  = factor (0 levels which means empty)
+
+# acts as a template and may be filled with information
+
+# -----------------------------------------------
+
+# 3
+
+new_resp <- c(1:10)
+new_sex <- c("Male", "Female", "Female", "Male", "Male", "Female", "Female", "Male", "Female", "Male")
+new_occ <- c(1,2,3,3,1,2,2,3,1,3)
+new_personsAtHome <- c(5,7,3,8,6,4,4,2,11,6)
+new_sibs <- c(2,3,0,5,2,3,1,2,6,2)
+new_type <- c("Wood", "Congrete", "Congrete", "Wood", "Semi-congrete", "Semi-congrete", "Wood", "Semi-congrete", "Semi-congrete", "Congrete")
+
+HouseholdData <- data.frame(
+  Respondents = new_resp,
+  Sex = new_sex,
+  FatherOccupation = new_occ,
+  PersonAtHome = new_personsAtHome,
+  SiblingsAtSchool = new_sibs,
+  HouseType = new_type
+)
+
+write.csv(HouseholdData, file = "HouseholdData.csv")
+
+#3a
+
+imported <-  read.csv("HouseholdData.csv")
+imported
+
+#3b
+
+imported$Sex <- factor(imported$Sex, levels = c("Male", "Female"))
+imported$Sex <- as.integer(imported$Sex)
+
+imported$Sex
+
+#3c
+
+imported$HouseType <- factor(imported$HouseType, levels = c("Wood", "Congrete", "Semi-congrete"))
+imported$HouseType <- as.integer(imported$HouseType)
+
+imported$HouseType
+
+#3d
+
+imported$FatherOccupation <- factor(imported$FatherOccupation, levels = c(1,2,3), labels = c("Farmer", "Driver", "Others"))
+
+imported$FatherOccupation
+
+#3e
+
+female_driver <- imported[imported$Sex == 2 & imported$FatherOccupation == "Driver",]
+female_driver
+
+#3f
+
+greaterFive <- imported[imported$SiblingsAtSchool >= 5,]
+greaterFive
+
+
+#4
+
+# We may infer from this data that public sentiment is sensitive to outside influences and that it changes over time.
