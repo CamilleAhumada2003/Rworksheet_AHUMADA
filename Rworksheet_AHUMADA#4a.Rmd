@@ -1,0 +1,65 @@
+---
+title: "Rworksheet_AHUMADA#4"
+output: pdf_document
+date: "2023-10-25"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+#1. The table below shows the data about shoe size and height. Create a data frame.
+
+dtaframe <- data.frame (Gender=c("F","F","F","F","M","F","F","F","M","F","M","F","M","M","M","M","F","F","M","F","F","M","M","F","M","M","M","M"),
+                 Shoe_Size=c(6.5,9.0,8.5,8.5,10.5,7.0,9.5,9.0,13.0,7.5,10.5,8.5,12.0,10.5,13.0,11.5,8.5,5.0,10.0,6.5,7.5,8.5,10.5,8.5,10.5,11.0,9.0,13.0),
+                 Height=c(66.0,68.0,64.5,65.0,70.0,64.0,70.0,71.0,72.0,64.0,74.5,67.0,71.0,71.0,77.0,72.0,59.0,62.0,72.0,66.0,64.0,67.0,73.0,69.0,72.0,70.0,69.0,70.0))
+
+dtaframe
+
+#a. Describe the data.
+
+#The gender, shoe size, and height of each person are all listed in this data set.
+
+#Along with the associated values for each attribute. With only 28 data points, the dataset seems to be somewhat little.
+
+#b. Create a subset by males and females with their corresponding shoe size and height.
+
+females_subset <- dtaframe[dtaframe$Gender == "F", c("Gender", "Shoe_Size", "Height")]
+females_subset
+
+males_subset <- dtaframe[dtaframe$Gender == "M", c("Gender", "Shoe_Size", "Height")]
+males_subset
+
+
+#c.Find the mean of shoe size and height of the respondents. Write the R scripts and its result.
+
+mean_shoe_size <- mean(df$Shoe_Size)
+mean_height <- mean(df$Height)
+
+mean_shoe_size
+mean_height
+
+
+
+
+
