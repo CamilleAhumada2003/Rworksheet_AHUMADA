@@ -1,0 +1,35 @@
+---
+title: "RWorksheet_AHUMADA#4b"
+output: pdf_document
+date: "2023-11-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#1. Using the for loop, create an R script that will display a 5x5 matrix as shown in Figure 1. It must contain vectorA = [1,2,3,4,5] and a 5 x 5 zero matrix.
+
+vector_A <- c(1,2,3,4,5)
+
+matrix_A <- matrix(0,nrow = 5, ncol =5)
+
+for (j in 1:5)
+  for (k in 1:5)
+  {
+    matrix_A[j,k] <- abs (vector_A[j] - vector_A[k])
+  }
+
+matrix_A
+
+#2. Print the string "*" using for() function. The output should be the same as shown in Figure1
+
+for (j in 1:5) {
+  cat(paste0("\"", rep("*", j), "\""), "\n")
+}
+
+#3. Get an input from the user to print the Fibonacci sequence starting from the 1st input up to 500. Use repeat and break statements. Write the R Scripts and its output.
+
+
+
+
