@@ -1,0 +1,32 @@
+---
+title: "Worksheet4c"
+output: pdf_document
+date: "2023-11-22"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1. Use the dataset mpg
+```{r}
+
+
+mpg <- read.csv(file = "mpg.csv", header = T, sep = ",")
+mpg
+```
+
+2.
+
+```{r}
+
+
+str(mpg)
+
+categorical_vars <- sapply(mpg, function(x) is.factor(x) || is.character(x))
+cat_vars_names <- names(categorical_vars[categorical_vars])
+
+
+cat_vars_names
+```
+
